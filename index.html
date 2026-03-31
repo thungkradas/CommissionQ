@@ -7,37 +7,97 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-main: #e0f2fe; --paper: #ffffff; --text-dark: #1e3a8a; --accent-blue: #3b82f6; --line-color: rgba(59, 130, 246, 0.15); }
-        body { background-color: var(--bg-main); background-image: repeating-linear-gradient(to right, #e0f2fe, #e0f2fe 30px, #d1e9ff 30px, #d1e9ff 60px); font-family: 'Prompt', sans-serif; color: var(--text-dark); overflow-x: hidden; }
-        .font-fredoka { font-family: 'Fredoka', sans-serif; }
-        
-        /* ขยายขนาดหน้าต่างเมื่ออยู่ในคอม (md:max-w-4xl) */
-        .main-container { width: 100%; margin-left: auto; margin-right: auto; transition: all 0.3s ease; }
-
-        .paper-container { 
-            background-color: var(--paper); position: relative; 
-            background-image: repeating-linear-gradient(to bottom, transparent, transparent 31px, var(--line-color) 31px, var(--line-color) 32px); 
-            background-position: top 40px center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-radius: 12px; 
+        :root {
+            --bg-sky: #e0f2fe;
+            --cloud: #ffffff;
+            --text-dark: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --line-color: rgba(59, 130, 246, 0.1);
         }
-        .jagged-top, .jagged-bottom { position: absolute; left: 0; width: 100%; height: 10px; background-size: 15px 15px; background-repeat: repeat-x; }
-        .jagged-top { top: -9px; background-image: linear-gradient(-45deg, transparent 8px, var(--paper) 0), linear-gradient(45deg, transparent 8px, var(--paper) 0); }
-        .jagged-bottom { bottom: -9px; background-image: linear-gradient(-45deg, var(--paper) 8px, transparent 0), linear-gradient(45deg, var(--paper) 8px, transparent 0); }
-        
+
+        body {
+            background-color: var(--bg-sky);
+            font-family: 'Prompt', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            position: relative;
+            min-h-screen: 100vh;
+        }
+
+        .font-fredoka { font-family: 'Fredoka', sans-serif; }
+
+        /* Cloud Background Animation */
+        .cloud-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--cloud) 0%, transparent 150px),
+                radial-gradient(circle at 80% 20%, var(--cloud) 0%, transparent 200px),
+                radial-gradient(circle at 50% 80%, var(--cloud) 0%, transparent 300px);
+            opacity: 0.5; z-index: -2;
+        }
+
+        /* Floating Items (Stars, Hearts) */
+        @keyframes float-anim {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+            50% { transform: translateY(-20px) rotate(10deg); opacity: 1; }
+        }
+        .floater {
+            position: fixed; pointer-events: none; z-index: -1;
+            animation: float-anim infinite ease-in-out;
+            color: var(--accent-blue);
+        }
+
+        /* Main container sizing */
+        .main-container {
+            width: 100%; margin-left: auto; margin-right: auto;
+            transition: all 0.3s ease; padding-top: 60px;
+        }
+
+        /* Notebook Style with Lines */
+        .paper-container {
+            background-color: #ffffff; position: relative;
+            background-image: repeating-linear-gradient(to bottom, transparent, transparent 31px, var(--line-color) 31px, var(--line-color) 32px);
+            background-position: top 40px center;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .jagged-top, .jagged-bottom {
+            position: absolute; left: 0; width: 100%; height: 10px; background-size: 15px 15px; background-repeat: repeat-x;
+        }
+        .jagged-top { top: -9px; background-image: linear-gradient(-45deg, transparent 8px, #ffffff 0), linear-gradient(45deg, transparent 8px, #ffffff 0); }
+        .jagged-bottom { bottom: -9px; background-image: linear-gradient(-45deg, #ffffff 8px, transparent 0), linear-gradient(45deg, #ffffff 8px, transparent 0); }
+
+        /* Progress Bar */
         .progress-container { height: 8px; background: #f1f5f9; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, #60a5fa, #3b82f6); transition: width 1s ease; }
-        
-        .nav-bottom { position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #e2e8f0; padding: 10px 5px; z-index: 50; height: 75px; display: flex; justify-content: space-around; align-items: center; }
-        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
+
+        /* Navigation Bottom */
+        .nav-bottom {
+            position: fixed; bottom: 0; left: 0; width: 100%; background: white;
+            border-top: 1px solid #e2e8f0; padding: 10px 5px; z-index: 50; height: 75px;
+            display: flex; justify-content: space-around; align-items: center;
+        }
+
+        /* Modal / Popup */
+        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.3); backdrop-filter: blur(5px); align-items: center; justify-content: center; padding: 20px; }
         .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 18px; }
-        
-        /* ปฏิทินจิ๋ว */
-        .mini-calendar { width: 220px; font-size: 9px; }
+
+        /* Mini Calendar */
+        .mini-calendar { width: 160px; font-size: 8px; }
         .cal-day { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 600; }
         .today { background: #3b82f6; color: white; }
         .deadline-mark { background: #dbeafe; color: #1e40af; border: 1px solid #3b82f6; }
     </style>
 </head>
-<body class="pb-24 pt-16">
+<body>
+
+    <div class="cloud-bg"></div>
+
+    <div class="floater text-3xl" style="top: 15%; left: 10%; animation-duration: 6s;">⭐</div>
+    <div class="floater text-2xl" style="top: 60%; left: 15%; animation-duration: 7s;">💙</div>
+    <div class="floater text-4xl" style="top: 25%; right: 12%; animation-duration: 5s;">✨</div>
+    <div class="floater text-2xl" style="top: 75%; right: 18%; animation-duration: 8s;">💖</div>
+    <div class="floater text-3xl" style="top: 85%; left: 40%; animation-duration: 6s;">⭐</div>
 
     <button onclick="openContact()" class="fixed top-4 right-4 z-[60] bg-white/90 backdrop-blur-md border-2 border-blue-300 p-2 rounded-2xl shadow-lg hover:scale-105 transition-all">
         <div class="flex flex-col items-center">
@@ -48,37 +108,37 @@
 
     <div class="main-container max-w-md md:max-w-4xl px-4">
         
-        <div class="w-full aspect-[16/5] bg-blue-100 rounded-3xl overflow-hidden shadow-md border-4 border-white mb-6 relative">
-            <div class="absolute inset-0 flex items-center justify-center opacity-20 italic">Banner Space</div>
+        <div class="w-full aspect-[16/5] bg-white rounded-3xl overflow-hidden shadow-md border-4 border-white mb-6 relative">
+            <div class="absolute inset-0 flex items-center justify-center opacity-30 italic font-fredoka">Your Banner Here</div>
         </div>
 
         <div class="flex flex-col md:flex-row gap-6 items-start">
             
-            <div class="mini-calendar glass-card p-3 border border-blue-200 shrink-0 mx-auto md:mx-0">
-                <h3 id="cal-month" class="font-fredoka text-[10px] font-bold text-blue-600 mb-2 text-center uppercase">Month 2026</h3>
-                <div class="grid grid-cols-7 gap-1 text-center opacity-40 font-bold mb-1" style="font-size: 7px;">
+            <div class="mini-calendar glass-card p-3 border border-blue-200 shrink-0 mx-auto md:mx-0 shadow-inner bg-white/50">
+                <h3 id="cal-month" class="font-fredoka text-[9px] font-bold text-blue-600 mb-2 text-center uppercase tracking-widest">Month 2026</h3>
+                <div class="grid grid-cols-7 gap-1 text-center opacity-40 font-bold mb-1" style="font-size: 6px;">
                     <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
                 </div>
-                <div id="calendar-grid" class="grid grid-cols-7 gap-1"></div>
+                <div id="calendar-grid" class="grid grid-cols-7 gap-0.5"></div>
             </div>
 
-            <div class="paper-container flex-1 w-full pt-8 pb-12 px-5 sm:px-8 z-10 relative">
+            <div class="paper-container flex-1 w-full pt-8 pb-12 px-6 sm:px-10 z-10 relative">
                 <div class="jagged-top"></div>
                 <div class="jagged-bottom"></div>
 
                 <div class="flex justify-between items-start mb-8">
                     <div>
-                        <h1 class="font-fredoka text-blue-600 text-2xl md:text-4xl font-black leading-none uppercase">Queue List</h1>
-                        <p class="text-[10px] md:text-sm mt-1 text-blue-400 font-medium italic">✨ รายการคิวงานทั้งหมด</p>
+                        <h1 class="font-fredoka text-blue-600 text-3xl md:text-5xl font-black leading-none uppercase">Queue List</h1>
+                        <p class="text-[10px] md:text-sm mt-1 text-blue-400 font-medium italic">✨ รายการคิวงานทั้งหมด ตรวจสอบได้ที่นี่</p>
                     </div>
-                    <div class="bg-blue-500 text-white px-4 py-2 rounded-2xl text-center shadow-md min-w-[90px]">
+                    <div class="bg-blue-500 text-white px-4 py-2 rounded-2xl text-center shadow-lg min-w-[90px] border-2 border-white">
                         <p class="text-[8px] md:text-[10px] uppercase font-bold leading-tight italic">Current<br>Queue</p>
-                        <p id="total-working" class="text-2xl md:text-3xl font-black font-fredoka leading-none">--</p>
+                        <p id="total-working" class="text-3xl md:text-4xl font-black font-fredoka leading-none">--</p>
                     </div>
                 </div>
 
-                <div id="queue-list" class="space-y-3 min-h-[300px]">
-                    <p class="text-center py-20 opacity-40 text-xs italic font-medium">กำลังเปิดสมุดโน้ต...</p>
+                <div id="queue-list" class="space-y-4 min-h-[300px]">
+                    <p class="text-center py-20 opacity-40 text-xs italic font-medium">กำลังเปิดสมุดจดคิวงาน...</p>
                 </div>
             </div>
         </div>
@@ -90,26 +150,13 @@
             <h3 id="m-name" class="text-2xl font-bold mb-4 text-blue-900 leading-tight">ชื่อลูกค้า</h3>
             <div class="space-y-4 border-t pt-4">
                 <div><span class="opacity-50 text-[10px] font-bold uppercase block mb-1">รายละเอียด</span><span id="m-detail" class="text-blue-800 font-medium">-</span></div>
-                <div class="flex justify-between items-center bg-blue-50 p-2.5 rounded-xl">
-                    <span class="opacity-60 text-[10px] font-bold uppercase">Deadline</span>
+                <div class="flex justify-between items-center bg-blue-50 p-3 rounded-xl border border-blue-100 shadow-inner">
+                    <span class="opacity-60 text-[10px] font-bold uppercase text-blue-900">Deadline</span>
                     <span id="m-deadline" class="text-blue-600 font-bold tracking-tight bg-white px-2 py-0.5 rounded-md shadow-sm">-</span>
                 </div>
                 <div><span class="opacity-50 text-[10px] font-bold uppercase block mb-1">หมายเหตุ</span><span id="m-note" class="italic text-gray-400">-</span></div>
             </div>
-            <button onclick="closeModal()" class="w-full mt-6 bg-blue-500 text-white py-3 rounded-2xl font-bold active:scale-95 transition shadow-lg">ปิดหน้าต่าง</button>
-        </div>
-    </div>
-
-    <div id="contact-modal" class="modal" onclick="closeContact()">
-        <div class="glass-card bg-white p-7 w-full max-w-xs shadow-2xl transform scale-95 transition-all" id="contact-inner" onclick="event.stopPropagation()">
-            <h3 class="text-lg font-bold text-blue-600 text-center mb-5 italic font-fredoka uppercase tracking-wider">Contact Me ✨</h3>
-            <div class="grid gap-2.5 text-sm font-bold text-center">
-                <a href="ใส่_ลิ้งค์_Line" class="bg-[#06C755] text-white py-3 rounded-2xl">LINE</a>
-                <a href="ใส่_ลิ้งค์_Facebook" class="bg-[#1877F2] text-white py-3 rounded-2xl">FACEBOOK</a>
-                <a href="ใส่_ลิ้งค์_Instagram" class="bg-gradient-to-r from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white py-3 rounded-2xl">INSTAGRAM</a>
-                <a href="ใส่_ลิ้งค์_VGen" class="bg-black text-white py-3 rounded-2xl border-2 border-white/10">VGEN</a>
-            </div>
-            <button onclick="closeContact()" class="w-full mt-5 text-gray-400 text-[10px] font-bold tracking-tighter">CLOSE</button>
+            <button onclick="closeModal()" class="w-full mt-6 bg-blue-500 text-white py-3 rounded-2xl font-bold active:scale-95 transition shadow-lg border-2 border-white/50">ปิดหน้าต่าง</button>
         </div>
     </div>
 
@@ -119,9 +166,23 @@
         <a href="prices.html" class="flex flex-col items-center text-gray-400 font-bold gap-1"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="text-[9px]">ราคา</span></a>
     </nav>
 
+    <div id="contact-modal" class="modal" onclick="closeContact()">
+        <div class="glass-card bg-white p-7 w-full max-w-xs shadow-2xl transform scale-95 transition-all" id="contact-inner" onclick="event.stopPropagation()">
+            <h3 class="text-lg font-bold text-blue-600 text-center mb-5 italic font-fredoka uppercase tracking-wider">Contact Me ✨</h3>
+            <div class="grid gap-2.5 text-sm font-bold text-center">
+                <a href="ใส่_ลิ้งค์_Line" target="_blank" class="bg-[#06C755] text-white py-3 rounded-2xl active:scale-95 transition shadow">LINE</a>
+                <a href="ใส่_ลิ้งค์_Facebook" target="_blank" class="bg-[#1877F2] text-white py-3 rounded-2xl active:scale-95 transition shadow">FACEBOOK</a>
+                <a href="ใส่_ลิ้งค์_Instagram" target="_blank" class="bg-gradient-to-r from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white py-3 rounded-2xl active:scale-95 transition shadow">INSTAGRAM</a>
+                <a href="ใส่_ลิ้งค์_VGen" target="_blank" class="bg-black text-white py-3 rounded-2xl active:scale-95 transition shadow border-2 border-white/10">VGEN</a>
+            </div>
+            <button onclick="closeContact()" class="w-full mt-5 text-gray-400 text-[10px] font-bold tracking-tighter">CLOSE</button>
+        </div>
+    </div>
+
     <script>
         const API_URL = 'https://script.google.com/macros/s/AKfycby0BShFOZHG56avG_I3t7CzX_pIv2tJ5pCKbU4ISNgw1HCdWhkTasD5_9Mz8UQtrfaN/exec';
 
+        // ปรับ Format วันที่
         function formatDate(rawDate) {
             if (!rawDate) return '-';
             const d = new Date(rawDate);
@@ -141,29 +202,36 @@
                 const workingJob = data.find(item => item.status === 'กำลังทำ');
                 totalDisplay.innerText = workingJob ? workingJob.q_id.toString().padStart(2, '0') : '--';
 
+                // สร้างปฏิทิน
                 buildCalendar(data);
 
+                // แสดงคิวทั้งหมด
                 data.forEach(item => {
                     const progressValue = item.progress ? item.progress.toString().replace('%','') : 0;
                     const isWorking = item.status === 'กำลังทำ';
                     const row = document.createElement('div');
-                    row.className = `glass-card p-4 flex flex-col gap-2 cursor-pointer border ${isWorking ? 'border-blue-500 shadow-md' : 'border-blue-50'} mb-2 transition-all hover:bg-white`;
+                    
+                    // สไตล์การ์ด: ถ้ากำลังทำจะมีขอบสีฟ้าเข้มและเงา
+                    row.className = `glass-card p-5 flex flex-col gap-2.5 cursor-pointer border ${isWorking ? 'border-blue-500 shadow-lg bg-white' : 'border-blue-50 bg-white/70'} mb-2 transition-all hover:bg-white active:scale-[0.98]`;
                     row.onclick = () => openModal(item);
+                    
                     row.innerHTML = `
                         <div class="flex justify-between items-center">
-                            <div class="flex items-center gap-2">
-                                <span class="font-fredoka font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded text-[10px]">#${item.q_id}</span>
-                                <span class="font-semibold text-xs md:text-sm truncate w-32 md:w-64">${item.customer}</span>
+                            <div class="flex items-center gap-2.5">
+                                <span class="font-fredoka font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded text-[11px] border border-blue-100">#${item.q_id}</span>
+                                <span class="font-semibold text-xs md:text-base truncate w-32 md:w-80 text-blue-950">${item.customer}</span>
                             </div>
-                            <span class="text-[8px] font-bold uppercase ${isWorking ? 'text-blue-600' : 'text-gray-300'}">${isWorking ? '● Working' : 'Waiting'}</span>
+                            <span class="text-[9px] font-bold uppercase tracking-tight flex items-center gap-1 ${isWorking ? 'text-blue-600' : 'text-gray-300'}">
+                                ${isWorking ? '<span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> Working' : 'Waiting'}
+                            </span>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="progress-container flex-1"><div class="progress-fill" style="width: ${progressValue}%"></div></div>
-                            <span class="font-fredoka font-bold text-blue-500 text-[10px]">${item.progress}</span>
+                            <span class="font-fredoka font-bold text-blue-500 text-xs">${item.progress}</span>
                         </div>`;
                     list.appendChild(row);
                 });
-            } catch (e) { list.innerHTML = '<p class="text-center py-10 text-xs">Error loading data.</p>'; }
+            } catch (e) { list.innerHTML = '<p class="text-center py-20 text-xs">Error loading data.</p>'; }
         }
 
         function buildCalendar(data) {
@@ -171,21 +239,27 @@
             const monthLabel = document.getElementById('cal-month');
             const now = new Date();
             monthLabel.innerText = now.toLocaleString('en-US', { month: 'short', year: 'numeric' });
+            
             const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
             const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+            
             grid.innerHTML = '';
             for(let i=0; i<firstDay; i++) grid.innerHTML += '<div></div>';
+            
             const deadlineDays = data.map(item => {
                 const d = new Date(item.deadline);
                 return isNaN(d.getTime()) ? null : d.toDateString();
             });
+
             for(let day=1; day<=daysInMonth; day++) {
                 const dateObj = new Date(now.getFullYear(), now.getMonth(), day);
                 const isToday = dateObj.toDateString() === now.toDateString();
                 const isDeadline = deadlineDays.includes(dateObj.toDateString());
+                
                 let cls = 'cal-day';
-                if(isToday) cls += ' today';
-                else if(isDeadline) cls += ' deadline-mark';
+                if(isToday) cls += ' today shadow';
+                else if(isDeadline) cls += ' deadline-mark shadow-sm';
+                
                 grid.innerHTML += `<div class="${cls}">${day}</div>`;
             }
         }
@@ -201,6 +275,7 @@
         function closeModal() { document.getElementById('detail-modal').style.display = 'none'; }
         function openContact() { document.getElementById('contact-modal').style.display = 'flex'; setTimeout(() => document.getElementById('contact-inner').classList.replace('scale-95', 'scale-100'), 10); }
         function closeContact() { document.getElementById('contact-inner').classList.replace('scale-100', 'scale-95'); setTimeout(() => document.getElementById('contact-modal').style.display = 'none', 200); }
+
         fetchQueue();
     </script>
 </body>
