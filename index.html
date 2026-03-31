@@ -3,137 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queue System - Blue Minimal</title>
+    <title>Queue System - Cloud & Stars</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #f0f7ff;
-            --accent-blue: #60a5fa;
+            --bg-sky: #e0f2fe;
+            --accent-blue: #3b82f6;
             --text-dark: #1e3a8a;
         }
-        body { background-color: var(--bg-main); font-family: 'Mitr', sans-serif; color: var(--text-dark); }
-        .font-fredoka { font-family: 'Fredoka', sans-serif; }
-        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 24px; }
-        .progress-bar { height: 8px; border-radius: 4px; background: #e2e8f0; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--accent-blue); transition: width 0.5s ease; }
-        .nav-bottom { position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #e2e8f0; padding: 12px; z-index: 50; }
+        body {
+            background-color: var(--bg-sky);
+            font-family: 'Prompt', sans-serif;
+            color: var(--text-dark);
+            /* ลูกเล่นก้อนเมฆและดาว (Background) */
+            background-image: radial-gradient(white 1px, transparent 1px), radial-gradient(white 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+        }
+        .cloud-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.5; pointer-events: none;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        /* หลอด Progress 100% */
+        .progress-container { height: 10px; background: #cbd5e1; border-radius: 5px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #60a5fa, #3b82f6); transition: width 0.8s ease; }
+        
+        .nav-bottom {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: white; border-top: 1px solid #e2e8f0;
+            padding: 15px; z-index: 50; display: flex; justify-content: space-around;
+        }
+        .modal {
+            display: none; position: fixed; inset: 0; z-index: 100;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+            align-items: center; justify-content: center;
+        }
     </style>
 </head>
-<body class="pb-24">
+<body class="pb-32">
 
-    <div class="max-w-4xl mx-auto p-4 sm:p-8">
-        <header class="flex justify-between items-center mb-8">
+    <div class="cloud-bg">
+        <svg class="absolute top-10 left-10 w-20 opacity-40" viewBox="0 0 24 24" fill="white"><path d="M17.5,19c-3.03,0-5.5-2.47-5.5-5.5c0-0.07,0.01-0.13,0.01-0.2C11.51,13.1,11.02,13,10.5,13C8.01,13,6,15.01,6,17.5S8.01,22,10.5,22h7c2.48,0,4.5-2.02,4.5-4.5S19.98,13,17.5,13c-0.17,0-0.34,0.01-0.5,0.03C16.32,10.15,13.88,8,11,8C7.69,8,5,10.69,5,14c0,0.1,0.01,0.2,0.02,0.3C3.25,14.89,2,16.55,2,18.5C2,20.98,4.02,23,6.5,23h11c1.93,0,3.5-1.57,3.5-3.5S19.43,16,17.5,16c-0.1,0-0.2,0.01-0.3,0.02C17.41,15.54,17.5,15.03,17.5,14.5C17.5,11.47,15.03,9,12,9c-0.17,0-0.34,0.01-0.5,0.04C11.12,6.13,8.76,4,6,4C2.69,4,0,6.69,0,10c0,0.1,0.01,0.2,0.02,0.3C-1.75,10.89-3,12.55-3,14.5c0,2.48,2.02,4.5,4.5,4.5h1"></path></svg>
+    </div>
+
+    <div class="max-w-4xl mx-auto mt-4 px-4">
+        <div class="w-full h-40 sm:h-56 bg-white rounded-3xl overflow-hidden shadow-lg border-4 border-white mb-8">
+            <img src="ใส่_URL_รูปแบนเนอร์_ตรงนี้" alt="Banner" class="w-full h-full object-cover">
+        </div>
+
+        <div class="flex justify-between items-end mb-8 px-2">
             <div>
-                <h1 class="font-fredoka text-3xl font-bold text-blue-600">QUEUE CHECK</h1>
-                <p class="text-sm opacity-70">เช็คสถานะงานและคิวปัจจุบัน</p>
+                <h1 class="text-3xl font-bold text-blue-600">สถานะคิวงาน</h1>
+                <p class="text-sm opacity-60 italic">✨ งานออกมาดีแน่นอน รอหน่อยนะจ๊ะ</p>
             </div>
-            <div class="bg-blue-500 text-white p-3 rounded-2xl text-center min-w-[100px]">
-                <p class="text-[10px] uppercase font-bold">คิวที่เหลือ</p>
-                <p id="total-queues" class="text-2xl font-black font-fredoka">00</p>
-            </div>
-        </header>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div class="md:col-span-1 space-y-6">
-                <div class="glass-card p-5 shadow-sm bg-white">
-                    <h3 class="font-bold mb-4 text-center border-b pb-2">Calendar</h3>
-                    <div id="calendar-grid" class="grid grid-cols-7 gap-1 text-center text-[10px]">
-                        <span class="opacity-50">S</span><span class="opacity-50">M</span><span class="opacity-50">T</span><span class="opacity-50">W</span><span class="opacity-50">T</span><span class="opacity-50">F</span><span class="opacity-50">S</span>
-                        <div class="p-1">29</div><div class="p-1">30</div><div class="p-1 bg-blue-500 text-white rounded-full font-bold">31</div>
-                        <div class="p-1">1</div><div class="p-1">2</div><div class="p-1">3</div><div class="p-1">4</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="md:col-span-2 space-y-4">
-                <h2 class="font-bold flex items-center gap-2">
-                    <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
-                    Current Progress
-                </h2>
-                
-                <div id="queue-container" class="space-y-4">
-                    <p class="text-center py-10 opacity-50">กำลังเชื่อมต่อข้อมูลคิว...</p>
-                </div>
+            <div class="text-right">
+                <span class="text-[10px] font-bold bg-blue-500 text-white px-3 py-1 rounded-full uppercase">Total Queue</span>
+                <p id="total-q" class="text-4xl font-bold text-blue-600">00</p>
             </div>
         </div>
 
-        <section class="mt-12">
-            <h2 class="font-bold text-xl mb-6 text-center uppercase tracking-widest font-fredoka">Prices & Work</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div class="aspect-square bg-white rounded-3xl border-2 border-dashed border-blue-200 flex flex-col items-center justify-center p-4 text-center hover:bg-blue-50 transition">
-                    <p class="text-xs font-bold">Web Design</p>
-                    <p class="text-blue-500 font-fredoka font-bold">129.-</p>
-                </div>
-                <div class="aspect-square bg-white rounded-3xl border-2 border-dashed border-blue-200 flex flex-col items-center justify-center p-4 text-center hover:bg-blue-50 transition">
-                    <p class="text-xs font-bold">Goodnotes</p>
-                    <p class="text-blue-500 font-fredoka font-bold">20.-</p>
-                </div>
-                <div class="aspect-square bg-blue-100 rounded-3xl overflow-hidden shadow-sm">
-                    <img src="https://via.placeholder.com/150/e0f2fe/60a5fa?text=Work+01" class="w-full h-full object-cover">
-                </div>
-                <div class="aspect-square bg-blue-100 rounded-3xl overflow-hidden shadow-sm">
-                    <img src="https://via.placeholder.com/150/e0f2fe/60a5fa?text=Work+02" class="w-full h-full object-cover">
-                </div>
-            </div>
-        </section>
+        <div id="queue-list" class="space-y-3">
+            <p class="text-center py-10 opacity-50">กำลังดึงข้อมูลจากดวงดาว...</p>
+        </div>
     </div>
 
-    <nav class="nav-bottom flex justify-around items-center max-w-4xl mx-auto left-0 right-0 rounded-t-3xl shadow-lg">
-        <a href="#" class="text-[10px] font-bold text-blue-500 flex flex-col items-center"><span>HOME</span></a>
-        <a href="https://lin.ee/xxxx" target="_blank" class="bg-blue-500 text-white px-6 py-2 rounded-full text-xs font-bold shadow-md hover:bg-blue-600">CONTACT LINE</a>
-        <a href="#" class="text-[10px] font-bold text-gray-400 flex flex-col items-center"><span>FACEBOOK</span></a>
+    <div id="detail-modal" class="modal" onclick="closeModal()">
+        <div class="glass-card bg-white p-8 max-w-sm w-full mx-4 shadow-2xl" onclick="event.stopPropagation()">
+            <h2 id="modal-id" class="text-blue-500 font-bold text-xl mb-1">Q-XX</h2>
+            <h3 id="modal-name" class="text-2xl font-bold mb-4">ชื่อลูกค้า</h3>
+            <div class="space-y-4 text-sm">
+                <div class="border-b pb-2">
+                    <p class="opacity-50 text-xs">รายละเอียดงาน</p>
+                    <p id="modal-detail" class="font-medium">-</p>
+                </div>
+                <div class="flex justify-between border-b pb-2">
+                    <span>Deadline</span>
+                    <span id="modal-deadline" class="font-bold text-red-500">-</span>
+                </div>
+                <div class="border-b pb-2">
+                    <p class="opacity-50 text-xs">หมายเหตุ</p>
+                    <p id="modal-note" class="italic">-</p>
+                </div>
+            </div>
+            <button onclick="closeModal()" class="w-full mt-6 bg-blue-500 text-white py-3 rounded-xl font-bold shadow-lg">ปิดหน้าต่าง</button>
+        </div>
+    </div>
+
+    <nav class="nav-bottom max-w-4xl mx-auto left-0 right-0 rounded-t-3xl shadow-2xl">
+        <a href="#" class="flex flex-col items-center text-blue-500 font-bold">
+            <span class="text-xs">หน้าหลัก</span>
+        </a>
+        <a href="https://lin.ee/xxxx" target="_blank" class="bg-blue-600 text-white px-8 py-2 rounded-full font-bold shadow-lg hover:scale-105 transition">
+            จองคิว / ติดต่อ
+        </a>
+        <a href="#price-section" onclick="alert('แสดงตารางราคางานวาด/ออกแบบ')" class="flex flex-col items-center text-gray-400 font-bold">
+            <span class="text-xs">ราคางาน</span>
+        </a>
     </nav>
 
     <script>
         const API_URL = 'https://script.google.com/macros/s/AKfycby0BShFOZHG56avG_I3t7CzX_pIv2tJ5pCKbU4ISNgw1HCdWhkTasD5_9Mz8UQtrfaN/exec';
 
         async function fetchQueue() {
-            const container = document.getElementById('queue-container');
-            const totalText = document.getElementById('total-queues');
-
+            const list = document.getElementById('queue-list');
             try {
                 const response = await fetch(API_URL);
                 const data = await response.json();
-                
-                // ล้างข้อความ "กำลังโหลด" ออก
-                container.innerHTML = '';
-                
-                // อัปเดตจำนวนคิวที่เหลือ (นับจำนวนแถวที่ดึงมาได้)
-                totalText.innerText = data.length.toString().padStart(2, '0');
+                list.innerHTML = '';
+                document.getElementById('total-q').innerText = data.length.toString().padStart(2, '0');
 
-                if (data.length === 0) {
-                    container.innerHTML = '<p class="text-center py-10 opacity-50">ตอนนี้ไม่มีคิวงานจ้า</p>';
-                    return;
-                }
-
-                // วนลูปสร้างการ์ดคิว
                 data.forEach(item => {
-                    const queueHtml = `
-                        <div class="glass-card p-5 shadow-sm bg-white hover:border-blue-300 transition-all">
-                            <div class="flex justify-between items-start mb-3">
-                                <div>
-                                    <span class="text-[10px] font-bold text-blue-500 bg-blue-50 px-2 py-0.5 rounded">${item.q_id || 'Q-XX'}</span>
-                                    <h3 class="font-bold mt-1">${item.task_name || 'ไม่มีชื่อโครงการ'}</h3>
+                    const row = document.createElement('div');
+                    row.className = 'glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/90 shadow-sm';
+                    row.onclick = () => openModal(item);
+                    
+                    row.innerHTML = `
+                        <div class="flex items-center gap-4">
+                            <span class="font-bold text-blue-600 w-8">#${item.q_id}</span>
+                            <span class="font-medium truncate w-24 sm:w-40">${item.customer}</span>
+                        </div>
+                        <div class="flex items-center gap-4 flex-1 justify-end">
+                            <div class="hidden sm:block w-32">
+                                <div class="progress-container">
+                                    <div class="progress-fill" style="width: ${item.progress}"></div>
                                 </div>
-                                <span class="text-xs font-bold ${item.status === 'เสร็จแล้ว' ? 'text-green-500' : 'text-blue-500'}">${item.status || 'รอตรวจสอบ'}</span>
                             </div>
-                            <div class="progress-bar mb-2">
-                                <div class="progress-fill" style="width: ${item.progress || 0}%"></div>
-                            </div>
-                            <p class="text-[10px] text-gray-500">ความคืบหน้า: ${item.progress || 0}% (${item.note || '-'})</p>
+                            <span class="font-bold text-blue-500 text-sm w-10">${item.progress}</span>
                         </div>
                     `;
-                    container.innerHTML += queueHtml;
+                    list.appendChild(row);
                 });
-
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                container.innerHTML = '<p class="text-center py-10 text-red-400">เกิดข้อผิดพลาดในการโหลดข้อมูล</p>';
+            } catch (e) {
+                list.innerHTML = '<p class="text-center text-red-400">Error: โหลดข้อมูลไม่สำเร็จจ้า</p>';
             }
         }
 
-        // เริ่มทำงานเมื่อโหลดหน้าเว็บ
+        function openModal(item) {
+            document.getElementById('modal-id').innerText = 'คิวที่ #' + item.q_id;
+            document.getElementById('modal-name').innerText = item.customer;
+            document.getElementById('modal-detail').innerText = item.details || 'ไม่มีรายละเอียด';
+            document.getElementById('modal-deadline').innerText = item.deadline || '-';
+            document.getElementById('modal-note').innerText = item.note || '-';
+            document.getElementById('detail-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('detail-modal').style.display = 'none';
+        }
+
         fetchQueue();
     </script>
 </body>
