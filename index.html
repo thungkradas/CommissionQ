@@ -2,148 +2,113 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thungkradas Q - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Work Queue - Thungkradas</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Mitr:wght@300;400;500;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-main: #e0f2fe;
-            --paper: #ffffff;
-            --text-dark: #1e3a8a;
-            --accent-blue: #3b82f6;
-            --line-color: rgba(59, 130, 246, 0.2);
-        }
-
-        body {
-            background-color: var(--bg-main);
-            background-image: repeating-linear-gradient(to right, #e0f2fe, #e0f2fe 40px, #d1e9ff 40px, #d1e9ff 80px);
-            font-family: 'Prompt', sans-serif;
-            color: var(--text-dark);
-            overflow-x: hidden;
-        }
-
+        :root { --bg-main: #e0f2fe; --paper: #ffffff; --text-dark: #1e3a8a; --accent-blue: #3b82f6; --line-color: rgba(59, 130, 246, 0.15); }
+        body { background-color: var(--bg-main); background-image: repeating-linear-gradient(to right, #e0f2fe, #e0f2fe 30px, #d1e9ff 30px, #d1e9ff 60px); font-family: 'Prompt', sans-serif; color: var(--text-dark); overflow-x: hidden; }
         .font-fredoka { font-family: 'Fredoka', sans-serif; }
-
-        .paper-container {
-            background-color: var(--paper);
-            position: relative;
-            background-image: repeating-linear-gradient(to bottom, transparent, transparent 35px, var(--line-color) 35px, var(--line-color) 36px);
-            background-position: top 40px center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-        }
-
-        .jagged-top {
-            position: absolute; top: -12px; left: 0; width: 100%; height: 13px;
-            background: linear-gradient(-45deg, transparent 9px, var(--paper) 0), linear-gradient(45deg, transparent 9px, var(--paper) 0);
-            background-size: 18px 18px; background-repeat: repeat-x;
-        }
-
-        .jagged-bottom {
-            position: absolute; bottom: -12px; left: 0; width: 100%; height: 13px;
-            background: linear-gradient(-45deg, var(--paper) 9px, transparent 0), linear-gradient(45deg, var(--paper) 9px, transparent 0);
-            background-size: 18px 18px; background-repeat: repeat-x;
-        }
-
-        /* Progress Bar Style */
-        .progress-container { height: 10px; background: #f1f5f9; border-radius: 5px; overflow: hidden; border: 1px solid #e2e8f0; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #60a5fa, #3b82f6); transition: width 0.8s ease; }
-
-        /* Navigation Bottom */
-        .nav-bottom {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: white; border-top: 1px solid #e2e8f0;
-            padding: 12px; z-index: 50; height: 80px;
-            display: flex; justify-content: space-around; align-items: center;
-        }
-
-        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 20px; transition: all 0.3s ease; }
-        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); align-items: center; justify-content: center; }
-
-        /* Floating Decorations */
-        @keyframes float-anim {
-            0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
-            50% { transform: translateY(-8px) rotate(calc(var(--rot, 0deg) + 5deg)); }
-        }
-        .decor-float { animation: float-anim 3.5s ease-in-out infinite; pointer-events: none; position: absolute; opacity: 0.6; }
+        .paper-container { background-color: var(--paper); position: relative; background-image: repeating-linear-gradient(to bottom, transparent, transparent 31px, var(--line-color) 31px, var(--line-color) 32px); background-position: top 40px center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-radius: 12px; }
+        .jagged-top, .jagged-bottom { position: absolute; left: 0; width: 100%; height: 10px; background-size: 15px 15px; background-repeat: repeat-x; }
+        .jagged-top { top: -9px; background-image: linear-gradient(-45deg, transparent 8px, var(--paper) 0), linear-gradient(45deg, transparent 8px, var(--paper) 0); }
+        .jagged-bottom { bottom: -9px; background-image: linear-gradient(-45deg, var(--paper) 8px, transparent 0), linear-gradient(45deg, var(--paper) 8px, transparent 0); }
+        .progress-container { height: 8px; background: #f1f5f9; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #60a5fa, #3b82f6); transition: width 1s ease; }
+        .nav-bottom { position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #e2e8f0; padding: 10px 5px; z-index: 50; height: 75px; display: flex; justify-content: space-around; align-items: center; }
+        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 18px; }
+        @keyframes float-anim { 0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); } 50% { transform: translateY(-5px) rotate(calc(var(--rot, 0deg) + 5deg)); } }
+        .decor { animation: float-anim 3.5s ease-in-out infinite; position: absolute; opacity: 0.4; pointer-events: none; }
     </style>
 </head>
-<body class="min-h-screen py-10 px-4 md:px-8 relative selection:bg-blue-100 selection:text-blue-900">
+<body class="pb-24 pt-16">
 
-    <svg class="decor-float top-10 left-5 w-10 h-10 text-blue-400" style="--rot: -12deg;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg class="decor-float top-40 right-10 w-8 h-8 text-blue-300" style="--rot: 15deg;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-    <svg class="decor-float bottom-40 left-10 w-12 h-12 text-blue-200" style="--rot: -20deg;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 0 0-9 9v7a2 2 0 0 0 2 2h3v-8H5v-1a7 7 0 0 1 14 0v1h-3v8h3a2 2 0 0 0 2-2v-7a9 9 0 0 0-9-9z"/></svg>
+    <button onclick="openContact()" class="fixed top-4 right-4 z-[60] bg-white/90 backdrop-blur-md border-2 border-blue-300 p-2 rounded-2xl shadow-lg hover:scale-110 transition-all">
+        <div class="flex flex-col items-center gap-0.5">
+            <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 3a9 9 0 0 0-9 9v7a2 2 0 0 0 2 2h3v-8H5v-1a7 7 0 0 1 14 0v1h-3v8h3a2 2 0 0 0 2-2v-7a9 9 0 0 0-9-9z"/>
+            </svg>
+            <span class="text-[8px] font-bold text-blue-600 uppercase">Contact</span>
+        </div>
+    </button>
 
-    <div class="max-w-4xl mx-auto flex flex-col gap-12 items-center w-full">
-        
-        <div class="w-full h-40 sm:h-56 bg-white rounded-[32px] overflow-hidden shadow-lg border-4 border-white z-20 relative">
-            <img src="https://drive.google.com/file/d/1xQ81FlV2CjtA5WNt6m622mi6QDg6Mj3o/view?usp=sharing" alt="Banner" class="w-full h-full object-cover">
+    <div class="decor top-20 left-5 text-blue-400" style="--rot: -10deg;">💙</div>
+    <div class="decor top-40 right-8 text-blue-300" style="--rot: 15deg;">⭐</div>
+    <div class="decor bottom-40 left-10 text-blue-200 w-6 h-6" style="--rot: -20deg;">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9v7a2 2 0 0 0 2 2h3v-8H5v-1a7 7 0 0 1 14 0v1h-3v8h3a2 2 0 0 0 2-2v-7a9 9 0 0 0-9-9z"/></svg>
+    </div>
+
+    <div class="max-w-md mx-auto px-4">
+        <div class="w-full aspect-[16/7] bg-blue-100 rounded-3xl overflow-hidden shadow-md border-4 border-white mb-6 relative group">
+            <img src="" alt="Banner" class="w-full h-full object-cover empty:hidden" id="main-banner">
+            <div class="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+                <p class="font-fredoka font-bold text-blue-500 text-xs tracking-widest uppercase">Banner Space</p>
+            </div>
         </div>
 
-        <div class="paper-container w-full rounded-sm pt-12 pb-20 px-6 sm:px-12 z-10 relative">
+        <div class="paper-container w-full pt-8 pb-12 px-5 z-10 relative">
             <div class="jagged-top"></div>
             <div class="jagged-bottom"></div>
 
-            <div class="flex justify-between items-end mb-10 pt-2 relative z-10">
+            <div class="flex justify-between items-start mb-6">
                 <div>
-                    <h1 class="font-fredoka text-blue-600 text-3xl sm:text-5xl font-black tracking-tighter uppercase leading-none">QUEUE STATUS</h1>
-                    <p class="mt-2 text-blue-400 text-sm font-medium italic">เช็คสถานะงานตามเลขคิวที่แจ้งได้เลยค่ะ</p>
+                    <h1 class="font-fredoka text-blue-600 text-2xl font-black leading-none uppercase">Work Queue</h1>
+                    <p class="text-[10px] mt-1 text-blue-400 font-medium">เฉพาะคิวที่กำลังดำเนินการอยู่ ✨</p>
                 </div>
-                <div class="bg-blue-500 text-white px-6 py-2 rounded-2xl text-center shadow-md">
-                    <p class="text-[10px] uppercase font-bold tracking-widest">Total</p>
-                    <p id="total-q" class="text-3xl font-black font-fredoka leading-none">00</p>
+                <div class="bg-blue-500 text-white px-3 py-1.5 rounded-xl text-center shadow-sm">
+                    <p class="text-[8px] uppercase font-bold leading-tight">คิวงานที่<br>กำลังทำ</p>
+                    <p id="total-working" class="text-xl font-black font-fredoka leading-none">00</p>
                 </div>
             </div>
 
-            <div id="queue-list" class="space-y-4 relative z-10 min-h-[300px]">
-                <p class="text-center py-20 opacity-50 font-medium">loading...</p>
+            <div id="queue-list" class="space-y-3 min-h-[200px]">
+                <p class="text-center py-10 opacity-40 text-xs">กำลังโหลดข้อมูลคิว...</p>
             </div>
         </div>
     </div>
 
     <div id="detail-modal" class="modal" onclick="closeModal()">
-        <div class="glass-card bg-white p-8 max-w-sm w-full mx-4 shadow-2xl" onclick="event.stopPropagation()">
-            <h2 id="modal-id" class="text-blue-500 font-bold text-xl mb-1">Q-XX</h2>
-            <h3 id="modal-name" class="text-2xl font-bold mb-4">ชื่อลูกค้า</h3>
-            <div class="space-y-4 text-sm text-left">
-                <div class="border-b pb-2"><p class="opacity-50 text-xs font-bold">รายละเอียด</p><p id="modal-detail" class="text-blue-900">-</p></div>
-                <div class="flex justify-between border-b pb-2"><span>Deadline</span><span id="modal-deadline" class="font-bold text-red-500">-</span></div>
-                <div class="border-b pb-2"><p class="opacity-50 text-xs font-bold">หมายเหตุ</p><p id="modal-note" class="italic text-gray-500">-</p></div>
+        <div class="glass-card bg-white p-6 w-full max-w-xs shadow-2xl text-sm" onclick="event.stopPropagation()">
+            <h2 id="m-id" class="text-blue-500 font-bold font-fredoka">Q-XX</h2>
+            <h3 id="m-name" class="text-lg font-bold mb-3">ชื่อลูกค้า</h3>
+            <div class="space-y-3 border-t pt-3">
+                <p><span class="opacity-50 text-[10px] block">รายละเอียด:</span> <span id="m-detail">-</span></p>
+                <p><span class="opacity-50 text-[10px] block">สถานะ:</span> <span id="m-status" class="text-blue-600 font-bold">-</span></p>
+                <p><span class="opacity-50 text-[10px] block">Deadline:</span> <span id="m-deadline" class="text-red-500 font-bold">-</span></p>
+                <p><span class="opacity-50 text-[10px] block">หมายเหตุ:</span> <span id="m-note" class="italic">-</span></p>
             </div>
-            <button onclick="closeModal()" class="w-full mt-6 bg-blue-500 text-white py-3 rounded-xl font-bold shadow-lg hover:bg-blue-600 transition">ปิดหน้าต่าง</button>
+            <button onclick="closeModal()" class="w-full mt-5 bg-blue-500 text-white py-2.5 rounded-xl font-bold shadow-md">ปิดหน้าต่าง</button>
         </div>
     </div>
 
     <div id="contact-modal" class="modal" onclick="closeContact()">
-        <div class="glass-card bg-white p-8 w-full max-w-xs shadow-2xl" onclick="event.stopPropagation()">
-            <h3 class="text-xl font-bold text-blue-600 text-center mb-6">Contact Me ✨</h3>
-            <div class="grid grid-cols-1 gap-3 font-bold">
-                <a href="ใส่_ลิ้งค์_Line_ตรงนี้" target="_blank" class="flex items-center justify-center bg-[#06C755] text-white py-3 rounded-2xl hover:opacity-90 transition">LINE</a>
-                <a href="ใส่_ลิ้งค์_FB_ตรงนี้" target="_blank" class="flex items-center justify-center bg-[#1877F2] text-white py-3 rounded-2xl hover:opacity-90 transition">FACEBOOK</a>
-                <a href="ใส่_ลิ้งค์_IG_ตรงนี้" target="_blank" class="flex items-center justify-center bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white py-3 rounded-2xl hover:opacity-90 transition">INSTAGRAM</a>
-                <a href="ใส่_ลิ้งค์_VGen_ตรงนี้" target="_blank" class="flex items-center justify-center bg-black text-white py-3 rounded-2xl hover:opacity-90 transition border-2 border-white/20">VGEN</a>
+        <div class="glass-card bg-white p-6 w-full max-w-xs shadow-2xl transform scale-95 transition-all" id="contact-inner" onclick="event.stopPropagation()">
+            <h3 class="text-lg font-bold text-blue-600 text-center mb-5 italic">Contact Me ✨</h3>
+            <div class="grid gap-2 text-sm font-bold text-center">
+                <a href="ใส่_ลิ้งค์_Line" target="_blank" class="bg-[#06C755] text-white py-2.5 rounded-xl">LINE</a>
+                <a href="ใส่_ลิ้งค์_Facebook" target="_blank" class="bg-[#1877F2] text-white py-2.5 rounded-xl">FACEBOOK</a>
+                <a href="ใส่_ลิ้งค์_IG" target="_blank" class="bg-gradient-to-r from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white py-2.5 rounded-xl">INSTAGRAM</a>
+                <a href="ใส่_ลิ้งค์_VGen" target="_blank" class="bg-black text-white py-2.5 rounded-xl border-2 border-white/10">VGEN</a>
             </div>
-            <button onclick="closeContact()" class="w-full mt-6 text-gray-400 text-xs font-bold uppercase tracking-widest">Close</button>
+            <button onclick="closeContact()" class="w-full mt-4 text-gray-400 text-[10px] uppercase font-bold">Close</button>
         </div>
     </div>
 
-    <nav class="nav-bottom max-w-4xl mx-auto left-0 right-0 rounded-t-[32px] shadow-2xl">
+    <nav class="nav-bottom max-w-md mx-auto left-0 right-0 rounded-t-3xl shadow-lg">
         <a href="index.html" class="flex flex-col items-center text-blue-500 font-bold gap-1">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
             <span class="text-[9px]">HOME</span>
         </a>
-        <a href="details.html" class="flex flex-col items-center text-gray-400 font-bold gap-1 group">
-            <svg class="w-6 h-6 group-hover:text-blue-400 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+        <a href="details.html" class="flex flex-col items-center text-gray-400 font-bold gap-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
             <span class="text-[9px]">รายละเอียด</span>
         </a>
-        <a href="prices.html" class="flex flex-col items-center text-gray-400 font-bold gap-1 group">
-            <svg class="w-6 h-6 group-hover:text-blue-400 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <a href="prices.html" class="flex flex-col items-center text-gray-400 font-bold gap-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             <span class="text-[9px]">ราคา</span>
         </a>
-        <button onclick="openContact()" class="flex flex-col items-center text-gray-400 font-bold gap-1 group">
-            <svg class="w-6 h-6 group-hover:text-blue-400 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-            <span class="text-[9px]">ติดต่อ</span>
-        </button>
     </nav>
 
     <script>
@@ -151,209 +116,69 @@
 
         async function fetchQueue() {
             const list = document.getElementById('queue-list');
-            const totalQ = document.getElementById('total-q');
+            const totalDisplay = document.getElementById('total-working');
             try {
                 const response = await fetch(API_URL);
                 const data = await response.json();
                 list.innerHTML = '';
-                totalQ.innerText = data.length.toString().padStart(2, '0');
+                
+                // กรองเฉพาะสถานะ "กำลังทำ"
+                const workingJobs = data.filter(item => item.status === 'กำลังทำ');
+                totalDisplay.innerText = workingJobs.length.toString().padStart(2, '0');
 
-                data.forEach(item => {
+                if (workingJobs.length === 0) {
+                    list.innerHTML = '<p class="text-center py-10 opacity-40 text-xs">ตอนนี้ยังไม่มีคิวงานที่กำลังทำจ้า</p>';
+                    return;
+                }
+
+                workingJobs.forEach(item => {
                     const row = document.createElement('div');
-                    row.className = 'glass-card p-5 flex items-center justify-between cursor-pointer hover:bg-blue-50/50 shadow-sm border border-blue-100';
+                    row.className = 'glass-card p-4 flex flex-col gap-2 cursor-pointer border border-blue-50 mb-2 hover:border-blue-300 transition-all';
                     row.onclick = () => openModal(item);
-                    
                     row.innerHTML = `
-                        <div class="flex items-center gap-4 text-left">
-                            <span class="font-fredoka font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded">#${item.q_id}</span>
-                            <span class="font-semibold truncate w-24 sm:w-40">${item.customer}</span>
-                        </div>
-                        <div class="flex items-center gap-4 flex-1 justify-end">
-                            <div class="hidden sm:block w-32">
-                                <div class="progress-container">
-                                    <div class="progress-fill" style="width: ${item.progress}"></div>
-                                </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-2">
+                                <span class="font-fredoka font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded text-xs">#${item.q_id}</span>
+                                <span class="font-semibold text-xs truncate w-24">${item.customer}</span>
                             </div>
-                            <span class="font-fredoka font-bold text-blue-500 text-sm">${item.progress}</span>
+                            <span class="text-[9px] font-bold text-green-500 uppercase tracking-tighter">Working</span>
                         </div>
-                    `;
+                        <div class="flex items-center gap-3">
+                            <div class="progress-container flex-1"><div class="progress-fill" style="width: ${item.progress}%"></div></div>
+                            <span class="font-fredoka font-bold text-blue-500 text-[10px]">${item.progress}%</span>
+                        </div>`;
                     list.appendChild(row);
                 });
-            } catch (e) {
-                list.innerHTML = '<p class="text-center py-20 text-red-400">โหลดข้อมูลไม่สำเร็จ ขออภัยด้วยค่ะ</p>';
-            }
+            } catch (e) { list.innerHTML = '<p class="text-center text-red-400 text-xs">โหลดไม่สำเร็จ</p>'; }
         }
 
-        function openModal(item) {
-            document.getElementById('modal-id').innerText = 'คิวที่ #' + item.q_id;
-            document.getElementById('modal-name').innerText = item.customer;
-            document.getElementById('modal-detail').innerText = item.details || 'ไม่มีรายละเอียด';
-            document.getElementById('modal-deadline').innerText = item.deadline || '-';
-            document.getElementById('modal-note').innerText = item.note || '-';
+        function openModal(i) {
+            document.getElementById('m-id').innerText = '#' + i.q_id;
+            document.getElementById('m-name').innerText = i.customer;
+            document.getElementById('m-detail').innerText = i.details || '-';
+            document.getElementById('m-status').innerText = i.status || '-';
+            document.getElementById('m-deadline').innerText = i.deadline || '-';
+            document.getElementById('m-note').innerText = i.note || '-';
             document.getElementById('detail-modal').style.display = 'flex';
         }
 
         function closeModal() { document.getElementById('detail-modal').style.display = 'none'; }
-        function openContact() { document.getElementById('contact-modal').style.display = 'flex'; }
-        function closeContact() { document.getElementById('contact-modal').style.display = 'none'; }
+        
+        function openContact() { 
+            const m = document.getElementById('contact-modal');
+            const inner = document.getElementById('contact-inner');
+            m.style.display = 'flex'; 
+            setTimeout(() => inner.classList.replace('scale-95', 'scale-100'), 10);
+        }
+        
+        function closeContact() { 
+            const m = document.getElementById('contact-modal');
+            const inner = document.getElementById('contact-inner');
+            inner.classList.replace('scale-100', 'scale-95');
+            setTimeout(() => m.style.display = 'none', 200);
+        }
 
         fetchQueue();
     </script>
-</body>
-</html>        </div>
-    </div>
-
-    <div id="detail-modal" class="modal" onclick="closeModal()">
-        <div class="glass-card bg-white p-8 max-w-sm w-full mx-4 shadow-2xl" onclick="event.stopPropagation()">
-            <h2 id="modal-id" class="text-blue-500 font-bold text-xl mb-1">Q-XX</h2>
-            <h3 id="modal-name" class="text-2xl font-bold mb-4">ชื่อลูกค้า</h3>
-            <div class="space-y-4 text-sm text-left">
-                <div class="border-b pb-2"><p class="opacity-50 text-xs">รายละเอียด</p><p id="modal-detail">-</p></div>
-                <div class="flex justify-between border-b pb-2"><span>Deadline</span><span id="modal-deadline" class="font-bold text-red-500">-</span></div>
-                <div class="border-b pb-2"><p class="opacity-50 text-xs">หมายเหตุ</p><p id="modal-note" class="italic">-</p></div>
-            </div>
-            <button onclick="closeModal()" class="w-full mt-6 bg-blue-500 text-white py-3 rounded-xl font-bold shadow-lg">ปิดหน้าต่าง</button>
-        </div>
-    </div>
-
-    <nav class="nav-bottom max-w-4xl mx-auto left-0 right-0 rounded-t-3xl shadow-2xl">
-        <a href="index.html" class="flex flex-col items-center text-blue-500 font-bold gap-1">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-            <span class="text-[10px]">HOME</span>
-        </a>
-        <a href="details.html" class="flex flex-col items-center text-gray-400 font-bold gap-1">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"></path></svg>
-            <span class="text-[10px]">รายละเอียด</span>
-        </a>
-        <a href="prices.html" class="flex flex-col items-center text-gray-400 font-bold gap-1">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span class="text-[10px]">ราคา</span>
-        </a>
-    </nav>
-
-    <script>
-        const API_URL = 'https://script.google.com/macros/s/AKfycby0BShFOZHG56avG_I3t7CzX_pIv2tJ5pCKbU4ISNgw1HCdWhkTasD5_9Mz8UQtrfaN/exec';
-        async function fetchQueue() {
-            const list = document.getElementById('queue-list');
-            try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                list.innerHTML = '';
-                document.getElementById('total-q').innerText = data.length.toString().padStart(2, '0');
-                data.forEach(item => {
-                    const row = document.createElement('div');
-                    row.className = 'glass-card p-4 flex items-center justify-between cursor-pointer hover:bg-white/90 shadow-sm mb-3';
-                    row.onclick = () => openModal(item);
-                    row.innerHTML = `<div class="flex items-center gap-4"><span class="font-bold text-blue-600">#${item.q_id}</span><span class="font-medium truncate w-32">${item.customer}</span></div>
-                        <div class="flex items-center gap-4 justify-end flex-1"><div class="hidden sm:block w-32"><div class="progress-container"><div class="progress-fill" style="width: ${item.progress}"></div></div></div><span class="font-bold text-blue-500 text-sm">${item.progress}</span></div>`;
-                    list.appendChild(row);
-                });
-            } catch (e) { list.innerHTML = '<p class="text-center text-red-400">โหลดไม่สำเร็จ</p>'; }
-        }
-        function openModal(item) {
-            document.getElementById('modal-id').innerText = 'คิวที่ #' + item.q_id;
-            document.getElementById('modal-name').innerText = item.customer;
-            document.getElementById('modal-detail').innerText = item.details || '-';
-            document.getElementById('modal-deadline').innerText = item.deadline || '-';
-            document.getElementById('modal-note').innerText = item.note || '-';
-            document.getElementById('detail-modal').style.display = 'flex';
-        }
-        function closeModal() { document.getElementById('detail-modal').style.display = 'none'; }
-        fetchQueue();
-    </script>
-    <div id="contact-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/20 backdrop-blur-sm" onclick="closeContact()">
-    <div class="glass-card bg-white p-8 w-full max-w-xs shadow-2xl transform scale-95 transition-all" onclick="event.stopPropagation()">
-        <h3 class="text-xl font-bold text-blue-600 text-center mb-6">Contact Me ✨</h3>
-        <div class="grid grid-cols-1 gap-3">
-            <a href="ใส่_ลิ้งค์_Line_ตรงนี้" target="_blank" class="flex items-center justify-center bg-[#06C755] text-white py-3 rounded-2xl font-bold hover:opacity-90 transition">
-                <span>LINE</span>
-            </a>
-            <a href="ใส่_ลิ้งค์_FB_ตรงนี้" target="_blank" class="flex items-center justify-center bg-[#1877F2] text-white py-3 rounded-2xl font-bold hover:opacity-90 transition">
-                <span>FACEBOOK</span>
-            </a>
-            <a href="ใส่_ลิ้งค์_IG_ตรงนี้" target="_blank" class="flex items-center justify-center bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white py-3 rounded-2xl font-bold hover:opacity-90 transition">
-                <span>INSTAGRAM</span>
-            </a>
-            <a href="ใส่_ลิ้งค์_VGen_ตรงนี้" target="_blank" class="flex items-center justify-center bg-black text-white py-3 rounded-2xl font-bold hover:opacity-90 transition border-2 border-white/20">
-                <span>VGEN</span>
-            </a>
-        </div>
-        <button onclick="closeContact()" class="w-full mt-6 text-gray-400 text-xs font-bold uppercase tracking-widest">Close</button>
-    </div>
-</div>
-
-<style>
-    /* เพิ่ม Style เล็กน้อยให้ Nav ดูสมบูรณ์ */
-    .nav-bottom button, .nav-bottom a { transition: all 0.2s; }
-    .nav-bottom button:active { transform: scale(0.9); }
-</style>
-
-<script>
-    // ฟังก์ชันเปิด-ปิด Contact Modal
-    function openContact() {
-        const modal = document.getElementById('contact-modal');
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            modal.querySelector('.glass-card').classList.remove('scale-95');
-            modal.querySelector('.glass-card').classList.add('scale-100');
-        }, 10);
-    }
-
-    function closeContact() {
-        const modal = document.getElementById('contact-modal');
-        modal.querySelector('.glass-card').classList.remove('scale-100');
-        modal.querySelector('.glass-card').classList.add('scale-95');
-        setTimeout(() => {
-            modal.classList.add('hidden');
-        }, 200);
-    }
-</script>
-    <div id="contact-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/20 backdrop-blur-sm" onclick="closeContact()">
-    <div class="glass-card bg-white p-8 w-full max-w-xs shadow-2xl transform scale-95 transition-all" onclick="event.stopPropagation()">
-        <h3 class="text-xl font-bold text-blue-600 text-center mb-6">Contact Me ✨</h3>
-        <div class="grid grid-cols-1 gap-3">
-            <a href="ใส่_ลิ้งค์_Line_ตรงนี้" target="_blank" class="flex items-center justify-center bg-[#06C755] text-white py-3 rounded-2xl font-bold hover:opacity-90 transition">
-                <span>LINE</span>
-            </a>
-            <a href="ใส่_ลิ้งค์_FB_ตรงนี้" target="_blank" class="flex items-center justify-center bg-[#1877F2] text-white py-3 rounded-2xl font-bold hover:opacity-90 transition">
-                <span>FACEBOOK</span>
-            </a>
-            <a href="ใส่_ลิ้งค์_IG_ตรงนี้" target="_blank" class="flex items-center justify-center bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white py-3 rounded-2xl font-bold hover:opacity-90 transition">
-                <span>INSTAGRAM</span>
-            </a>
-            <a href="ใส่_ลิ้งค์_VGen_ตรงนี้" target="_blank" class="flex items-center justify-center bg-black text-white py-3 rounded-2xl font-bold hover:opacity-90 transition border-2 border-white/20">
-                <span>VGEN</span>
-            </a>
-        </div>
-        <button onclick="closeContact()" class="w-full mt-6 text-gray-400 text-xs font-bold uppercase tracking-widest">Close</button>
-    </div>
-</div>
-
-<style>
-    /* เพิ่ม Style เล็กน้อยให้ Nav ดูสมบูรณ์ */
-    .nav-bottom button, .nav-bottom a { transition: all 0.2s; }
-    .nav-bottom button:active { transform: scale(0.9); }
-</style>
-
-<script>
-    // ฟังก์ชันเปิด-ปิด Contact Modal
-    function openContact() {
-        const modal = document.getElementById('contact-modal');
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            modal.querySelector('.glass-card').classList.remove('scale-95');
-            modal.querySelector('.glass-card').classList.add('scale-100');
-        }, 10);
-    }
-
-    function closeContact() {
-        const modal = document.getElementById('contact-modal');
-        modal.querySelector('.glass-card').classList.remove('scale-100');
-        modal.querySelector('.glass-card').classList.add('scale-95');
-        setTimeout(() => {
-            modal.classList.add('hidden');
-        }, 200);
-    }
-</script>
 </body>
 </html>
