@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thungkradas - Prices</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-sky: #e0f2fe; --accent-blue: #3b82f6; --text-dark: #1e3a8a; }
+        body { background-color: var(--bg-sky); font-family: 'Prompt', sans-serif; color: var(--text-dark); background-image: radial-gradient(white 1px, transparent 1px), radial-gradient(white 1px, transparent 1px); background-size: 50px 50px; background-position: 0 0, 25px 25px; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 20px; }
+        .img-box { width: 100%; aspect-ratio: 1/1; background: #fff; border-radius: 15px; border: 2px dashed #cbd5e1; overflow: hidden; }
+        .nav-bottom { position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #e2e8f0; padding: 12px; z-index: 50; height: 80px; display: flex; justify-content: space-around; align-items: center; }
+        table { width: 100%; font-size: 0.8rem; }
+        th { background: #eff6ff; color: #3b82f6; padding: 8px; text-align: left; border-radius: 8px; }
+        td { padding: 8px 4px; border-bottom: 1px solid #f1f5f9; }
+        .price-text { font-weight: 700; color: #2563eb; }
+    </style>
+</head>
+<body class="pb-32 px-4">
+    <div class="max-w-4xl mx-auto mt-8 space-y-8">
+        <h1 class="text-2xl font-bold text-blue-600 italic">Commission Prices</h1>
+
+        <div class="bg-blue-600 text-white p-6 rounded-[28px] shadow-lg">
+            <h2 class="font-bold mb-3">🍅</h2>
+            <ul class="text-[11px] space-y-1.5 opacity-90">
+                <li>• <span class="font-bold">เชิงพาณิชย์:</span> x2 ของราคารวม</li>
+                <li>• <span class="font-bold">เชิงพาณิชย์สิ่งพิมพ์:</span> x2.5 (1k ชิ้น) | x3 (8k ชิ้น)</li>
+                <li>• <span class="font-bold">Give away / เปิดหาร:</span> x1.5 ของราคารวม</li>
+                <li class="text-blue-200 font-bold">* ไม่รับงานสิทธิ์ขาด ทุกกรณี *</li>
+            </ul>
+        </div>
+
+        <section class="glass-card p-6 shadow-sm">
+            <h2 class="font-bold text-blue-600 mb-4 flex items-center gap-2">Minimol (MM) <span class="text-[10px] font-normal text-gray-400 italic">ตาโต/ตาขีดราคาเดียวกัน</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="sm:col-span-2">
+                    <table>
+                        <thead><tr><th>Scale</th><th>B&W</th><th>Color</th></tr></thead>
+                        <tbody>
+                            <tr><td>Only Head (หัว)</td><td class="price-text">55+</td><td class="price-text">60+</td></tr>
+                            <tr><td>Head Shot (หัว-อก)</td><td class="price-text">80+</td><td class="price-text">120+</td></tr>
+                            <tr><td>Half Body (หัว-เอว)</td><td class="price-text">140+</td><td class="price-text">180+</td></tr>
+                            <tr><td>Full Body (เต็มตัว)</td><td class="price-text">180+</td><td class="price-text">220+</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="img-box"><img src="ใส่_URL_รูปตัวอย่าง_ตรงนี้" class="w-full h-full object-cover"></div>
+            </div>
+        </section>
+
+        <section class="glass-card p-6 shadow-sm">
+            <h2 class="font-bold text-blue-600 mb-4">Chibi</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="sm:col-span-2">
+                    <table>
+                        <thead><tr><th>Scale</th><th>B&W</th><th>Color</th></tr></thead>
+                        <tbody>
+                            <tr><td>Only Head (หัว)</td><td class="price-text">50+</td><td class="price-text">60+</td></tr>
+                            <tr><td>Head Shot (หัว-อก)</td><td class="price-text">50+</td><td class="price-text">100+</td></tr>
+                            <tr><td>Half Body (หัว-เอว)</td><td class="price-text">100+</td><td class="price-text">140+</td></tr>
+                            <tr><td>Full Body (เต็มตัว)</td><td class="price-text">170+</td><td class="price-text">200+</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="img-box"><img src="ใส่_URL_รูปตัวอย่าง_ตรงนี้" class="w-full h-full object-cover"></div>
+            </div>
+        </section>
+
+        <section class="glass-card p-6 shadow-sm mb-10">
+            <h2 class="font-bold text-blue-600 mb-4">Emoji YCH <span class="text-[10px] font-normal text-gray-400">(Base: k'fayfayu)</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="sm:col-span-2">
+                    <table>
+                        <thead class="text-[10px]"><tr><th>จำนวน</th><th>ส่วนตัว</th><th>พาณิชย์</th><th>Sticker</th></tr></thead>
+                        <tbody>
+                            <tr><td>1 ชิ้น</td><td class="price-text">30.-</td><td class="price-text">60.-</td><td class="price-text">95.-</td></tr>
+                            <tr><td>4 ชิ้น</td><td class="price-text">100.-</td><td class="price-text">200.-</td><td class="price-text">300.-</td></tr>
+                            <tr><td>8 ชิ้น</td><td class="price-text">200.-</td><td class="price-text">400.-</td><td class="price-text">600.-</td></tr>
+                            <tr><td>12 ชิ้น</td><td class="price-text">320.-</td><td class="price-text">640.-</td><td class="price-text">960.-</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="img-box"><img src="ใส่_URL_รูปตัวอย่าง_ตรงนี้" class="w-full h-full object-cover"></div>
+            </div>
+        </section>
+
+        <div class="glass-card p-5 text-xs space-y-2 mb-10 border-l-8 border-blue-400">
+            <p>✦ ของตกแต่ง / สัตว์ : <span class="font-bold">เริ่ม 30.-</span></p>
+            <p>✦ พื้นหลัง : <span class="font-bold">เริ่ม 80.-</span></p>
+            <p>✦ ตัวละครซ้อนทับกัน <span class="font-bold text-blue-600">+80% ของสเกลนั้น</span></p>
+            <p class="opacity-60 italic">* ขนาดภาพพื้นฐาน 3000x3000px 300dpi RGB</p>
+        </div>
+    </div>
+
+    <nav class="nav-bottom max-w-4xl mx-auto left-0 right-0 rounded-t-3xl shadow-2xl">
+        <a href="index.html" class="flex flex-col items-center text-gray-400 font-bold gap-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span class="text-[10px]">HOME</span></a>
+        <a href="details.html" class="flex flex-col items-center text-gray-400 font-bold gap-1"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"></path></svg><span class="text-[10px]">รายละเอียด</span></a>
+        <a href="prices.html" class="flex flex-col items-center text-blue-500 font-bold gap-1"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="text-[10px]">ราคา</span></a>
+    </nav>
+</body>
+</html>
