@@ -1,0 +1,148 @@
+<script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycby0BShFOZHG56avG_I3t7CzX_pIv2tJ5pCKbU4ISNgw1HCdWhkTasD5_9Mz8UQtrfaN/exec';
+
+    async function fetchQueue() {
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            console.log(data); 
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    fetchQueue();
+</script>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue System - Blue Minimal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #f0f7ff;
+            --accent-blue: #60a5fa;
+            --text-dark: #1e3a8a;
+            --paper: #ffffff;
+        }
+        body {
+            background-color: var(--bg-main);
+            font-family: 'Mitr', sans-serif;
+            color: var(--text-dark);
+        }
+        .font-fredoka { font-family: 'Fredoka', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+        }
+        .progress-bar { height: 8px; border-radius: 4px; background: #e2e8f0; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent-blue); transition: width 0.5s ease; }
+        .nav-bottom {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: white; border-top: 1px solid #e2e8f0;
+            padding: 12px; z-index: 50;
+        }
+    </style>
+</head>
+<body class="pb-24">
+
+    <div class="max-w-4xl mx-auto p-4 sm:p-8">
+        <header class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="font-fredoka text-3xl font-bold text-blue-600">QUEUE CHECK</h1>
+                <p class="text-sm opacity-70">เช็คสถานะงานและคิวปัจจุบัน</p>
+            </div>
+            <div class="bg-blue-500 text-white p-3 rounded-2xl text-center min-w-[100px]">
+                <p class="text-[10px] uppercase font-bold">คิวที่เหลือ</p>
+                <p class="text-2xl font-black font-fredoka">05</p>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="md:col-span-1 space-y-6">
+                <div class="glass-card p-5 shadow-sm bg-white">
+                    <h3 class="font-bold mb-4 text-center border-b pb-2">Calendar</h3>
+                    <div class="grid grid-cols-7 gap-1 text-center text-[10px]">
+                        <span class="opacity-50">S</span><span class="opacity-50">M</span><span class="opacity-50">T</span><span class="opacity-50">W</span><span class="opacity-50">T</span><span class="opacity-50">F</span><span class="opacity-50">S</span>
+                        <div class="p-1">29</div><div class="p-1">30</div><div class="p-1 bg-blue-500 text-white rounded-full font-bold">31</div>
+                        <div class="p-1">1</div><div class="p-1">2</div><div class="p-1">3</div><div class="p-1">4</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 space-y-4">
+                <h2 class="font-bold flex items-center gap-2">
+                    <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
+                    Current Progress
+                </h2>
+                
+                <div class="glass-card p-5 shadow-sm bg-white hover:border-blue-300 transition-all">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <span class="text-[10px] font-bold text-blue-500 bg-blue-50 px-2 py-0.5 rounded">Q-01</span>
+                            <h3 class="font-bold mt-1">ออกแบบเว็บ Landing Page</h3>
+                        </div>
+                        <span class="text-xs font-bold text-green-500">กำลังดำเนินการ</span>
+                    </div>
+                    <div class="progress-bar mb-2">
+                        <div class="progress-fill" style="width: 75%;"></div>
+                    </div>
+                    <p class="text-[10px] text-gray-500">ความคืบหน้า: 75% (จัดหน้า Mobile)</p>
+                </div>
+
+                <div class="glass-card p-5 shadow-sm bg-white opacity-60">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <span class="text-[10px] font-bold text-gray-500 bg-gray-50 px-2 py-0.5 rounded">Q-02</span>
+                            <h3 class="font-bold mt-1">Goodnotes Package A</h3>
+                        </div>
+                        <span class="text-xs font-bold text-gray-400">รอคิว</span>
+                    </div>
+                    <div class="progress-bar mb-2">
+                        <div class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <p class="text-[10px] text-gray-500">ความคืบหน้า: 0%</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="mt-12">
+            <h2 class="font-bold text-xl mb-6 text-center uppercase tracking-widest font-fredoka">Prices & Work</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="aspect-square bg-white rounded-3xl border-2 border-dashed border-blue-200 flex flex-col items-center justify-center p-4 text-center hover:bg-blue-50 transition cursor-pointer">
+                    <p class="text-xs font-bold">Web Design</p>
+                    <p class="text-blue-500 font-fredoka font-bold">129.-</p>
+                </div>
+                <div class="aspect-square bg-white rounded-3xl border-2 border-dashed border-blue-200 flex flex-col items-center justify-center p-4 text-center hover:bg-blue-50 transition cursor-pointer">
+                    <p class="text-xs font-bold">Goodnotes</p>
+                    <p class="text-blue-500 font-fredoka font-bold">20.-</p>
+                </div>
+                <div class="aspect-square bg-blue-100 rounded-3xl overflow-hidden shadow-sm">
+                    <img src="https://via.placeholder.com/150/e0f2fe/60a5fa?text=Work+01" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-square bg-blue-100 rounded-3xl overflow-hidden shadow-sm">
+                    <img src="https://via.placeholder.com/150/e0f2fe/60a5fa?text=Work+02" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <nav class="nav-bottom flex justify-around items-center max-w-4xl mx-auto left-0 right-0 rounded-t-3xl shadow-lg">
+        <a href="#" class="text-[10px] font-bold text-blue-500 flex flex-col items-center">
+            <span>HOME</span>
+        </a>
+        <a href="https://lin.ee/xxxx" target="_blank" class="bg-blue-500 text-white px-6 py-2 rounded-full text-xs font-bold shadow-md hover:bg-blue-600">
+            CONTACT LINE
+        </a>
+        <a href="#" class="text-[10px] font-bold text-gray-400 flex flex-col items-center">
+            <span>FACEBOOK</span>
+        </a>
+    </nav>
+
+</body>
+</html>
