@@ -95,5 +95,52 @@
         function closeModal() { document.getElementById('detail-modal').style.display = 'none'; }
         fetchQueue();
     </script>
+    <div id="contact-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/20 backdrop-blur-sm" onclick="closeContact()">
+    <div class="glass-card bg-white p-8 w-full max-w-xs shadow-2xl transform scale-95 transition-all" onclick="event.stopPropagation()">
+        <h3 class="text-xl font-bold text-blue-600 text-center mb-6">Contact Me ✨</h3>
+        <div class="grid grid-cols-1 gap-3">
+            <a href="ใส่_ลิ้งค์_Line_ตรงนี้" target="_blank" class="flex items-center justify-center bg-[#06C755] text-white py-3 rounded-2xl font-bold hover:opacity-90 transition">
+                <span>LINE</span>
+            </a>
+            <a href="ใส่_ลิ้งค์_FB_ตรงนี้" target="_blank" class="flex items-center justify-center bg-[#1877F2] text-white py-3 rounded-2xl font-bold hover:opacity-90 transition">
+                <span>FACEBOOK</span>
+            </a>
+            <a href="ใส่_ลิ้งค์_IG_ตรงนี้" target="_blank" class="flex items-center justify-center bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white py-3 rounded-2xl font-bold hover:opacity-90 transition">
+                <span>INSTAGRAM</span>
+            </a>
+            <a href="ใส่_ลิ้งค์_VGen_ตรงนี้" target="_blank" class="flex items-center justify-center bg-black text-white py-3 rounded-2xl font-bold hover:opacity-90 transition border-2 border-white/20">
+                <span>VGEN</span>
+            </a>
+        </div>
+        <button onclick="closeContact()" class="w-full mt-6 text-gray-400 text-xs font-bold uppercase tracking-widest">Close</button>
+    </div>
+</div>
+
+<style>
+    /* เพิ่ม Style เล็กน้อยให้ Nav ดูสมบูรณ์ */
+    .nav-bottom button, .nav-bottom a { transition: all 0.2s; }
+    .nav-bottom button:active { transform: scale(0.9); }
+</style>
+
+<script>
+    // ฟังก์ชันเปิด-ปิด Contact Modal
+    function openContact() {
+        const modal = document.getElementById('contact-modal');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.querySelector('.glass-card').classList.remove('scale-95');
+            modal.querySelector('.glass-card').classList.add('scale-100');
+        }, 10);
+    }
+
+    function closeContact() {
+        const modal = document.getElementById('contact-modal');
+        modal.querySelector('.glass-card').classList.remove('scale-100');
+        modal.querySelector('.glass-card').classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 200);
+    }
+</script>
 </body>
 </html>
