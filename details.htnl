@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinkjulieland - Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-sky: #e0f2fe; --accent-blue: #3b82f6; --text-dark: #1e3a8a; }
+        body { background-color: var(--bg-sky); font-family: 'Prompt', sans-serif; color: var(--text-dark); background-image: radial-gradient(white 1px, transparent 1px), radial-gradient(white 1px, transparent 1px); background-size: 50px 50px; background-position: 0 0, 25px 25px; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 20px; }
+        .nav-bottom { position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #e2e8f0; padding: 12px; z-index: 50; height: 80px; display: flex; justify-content: space-around; align-items: center; }
+    </style>
+</head>
+<body class="pb-32 px-4">
+    <div class="max-w-4xl mx-auto mt-8 space-y-6">
+        <h1 class="text-2xl font-bold text-blue-600 italic">Details & Rules</h1>
+        
+        <div class="glass-card p-6">
+            <h3 class="font-bold mb-4 text-blue-500">📋 ขั้นตอนการทำงาน</h3>
+            <ul class="text-sm space-y-2 list-decimal pl-5">
+                <li>ส่งบรีฟเพื่อประเมินการรับงาน</li>
+                <li>นักวาดประเมินราคา / จ่ายเงิน/มัดจำ</li>
+                <li>รอถึงคิวงาน</li>
+                <li>ส่งภาพร่าง (แก้ท่าทางได้ 3 ครั้ง)</li>
+                <li>ตัดเส้นและลงสีพื้น (แก้สีได้ 3 ครั้ง)</li>
+                <li>จ่ายยอดที่เหลือ / ส่งงานสมบูรณ์</li>
+            </ul>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="glass-card p-5 bg-green-50/50">
+                <h3 class="font-bold text-green-600 mb-2">Do (รับ)</h3>
+                <ul class="text-xs space-y-1"><li>OC / fan art</li><li>เด็ก วัยรุ่น วัยกลางคน</li><li>สัตว์ก้อน ๆ / มิมิ</li></ul>
+            </div>
+            <div class="glass-card p-5 bg-red-50/50">
+                <h3 class="font-bold text-red-600 mb-2">Don't (ไม่รับ)</h3>
+                <ul class="text-xs space-y-1"><li>หน้าเข้ม / คนแก่ / กล้าม</li><li>ฉากอลังการ / เฟอรี่</li></ul>
+            </div>
+        </div>
+        
+        <div class="glass-card p-6 border-l-8 border-blue-500">
+             <h3 class="font-bold mb-2">💰 การชำระเงิน</h3>
+             <p class="text-xs">รับธนาคาร & Wallet | ยอด 300+ มัดจำได้ 50% | รันคิวตามการโอน | ระยะเวลา 1-7 วัน</p>
+        </div>
+    </div>
+
+    <nav class="nav-bottom max-w-4xl mx-auto left-0 right-0 rounded-t-3xl shadow-2xl">
+        <a href="index.html" class="flex flex-col items-center text-gray-400 font-bold gap-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span class="text-[10px]">HOME</span></a>
+        <a href="details.html" class="flex flex-col items-center text-blue-500 font-bold gap-1"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"></path></svg><span class="text-[10px]">รายละเอียด</span></a>
+        <a href="prices.html" class="flex flex-col items-center text-gray-400 font-bold gap-1"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="text-[10px]">ราคา</span></a>
+    </nav>
+</body>
+</html>
