@@ -45,7 +45,7 @@
             <div class="flex justify-between items-start mb-6">
                 <div>
                     <h1 class="font-fredoka text-blue-600 text-2xl font-black leading-none uppercase">Work Queue</h1>
-                    <p class="text-[10px] mt-1 text-blue-400 font-medium italic">✨ กำลังตั้งใจทำงานให้อยู่นะคะ</p>
+                    <p class="text-[10px] mt-1 text-blue-400 font-medium">ตรวจสอบสถานะงานได้ตรงนี้</p>
                 </div>
                 <div class="bg-blue-500 text-white px-3 py-1.5 rounded-xl text-center shadow-sm">
                     <p class="text-[8px] uppercase font-bold leading-tight">คิวงานที่<br>กำลังทำ</p>
@@ -54,7 +54,7 @@
             </div>
 
             <div id="queue-list" class="space-y-3 min-h-[200px]">
-                <p class="text-center py-10 opacity-40 text-xs italic">กำลังเปิดสมุดจดคิว...</p>
+                <p class="text-center py-10 opacity-40 text-xs italic">loading...</p>
             </div>
         </div>
     </div>
@@ -133,12 +133,6 @@
             list.innerHTML = '<p class="text-center py-10 opacity-40 text-xs italic">ตอนนี้ยังไม่มีคิวงานที่กำลังทำจ้า</p>';
             return;
         }
-
-        // วนลูปแสดงเฉพาะคิวที่ "กำลังทำ" เท่านั้นลงในหน้าหลัก
-        workingJobs.forEach(item => {
-            const row = document.createElement('div');
-            row.className = 'glass-card p-4 flex flex-col gap-2 cursor-pointer border border-blue-50 mb-2 hover:bg-white transition-all';
-            row.onclick = () => openModal(item);
             
             // ปรับการดึงค่า progress ให้ลบ % ออกถ้ามี เพื่อให้หลอดแสดงผลถูกต้อง
             const progressValue = item.progress ? item.progress.toString().replace('%', '') : 0;
