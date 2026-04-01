@@ -21,12 +21,11 @@
             color: var(--text-dark);
             overflow-x: hidden;
             position: relative;
-            min-h-screen: 100vh;
         }
 
         .font-fredoka { font-family: 'Fredoka', sans-serif; }
 
-        /* Cloud Background Animation */
+        /* Cloud Background */
         .cloud-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
@@ -36,10 +35,10 @@
             opacity: 0.5; z-index: -2;
         }
 
-        /* Floating Items (Stars, Hearts) */
+        /* Floating Icons Animation */
         @keyframes float-anim {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
-            50% { transform: translateY(-20px) rotate(10deg); opacity: 1; }
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(15deg); opacity: 0.6; }
         }
         .floater {
             position: fixed; pointer-events: none; z-index: -1;
@@ -47,57 +46,45 @@
             color: var(--accent-blue);
         }
 
-        /* Main container sizing */
-        .main-container {
-            width: 100%; margin-left: auto; margin-right: auto;
-            transition: all 0.3s ease; padding-top: 60px;
-        }
+        .main-container { width: 100%; margin-left: auto; margin-right: auto; transition: all 0.3s ease; padding-top: 20px; }
 
-        /* Notebook Style with Lines */
+        /* Notebook Style */
         .paper-container {
             background-color: #ffffff; position: relative;
             background-image: repeating-linear-gradient(to bottom, transparent, transparent 31px, var(--line-color) 31px, var(--line-color) 32px);
             background-position: top 40px center;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);
         }
-        .jagged-top, .jagged-bottom {
-            position: absolute; left: 0; width: 100%; height: 10px; background-size: 15px 15px; background-repeat: repeat-x;
-        }
+        .jagged-top, .jagged-bottom { position: absolute; left: 0; width: 100%; height: 10px; background-size: 15px 15px; background-repeat: repeat-x; }
         .jagged-top { top: -9px; background-image: linear-gradient(-45deg, transparent 8px, #ffffff 0), linear-gradient(45deg, transparent 8px, #ffffff 0); }
         .jagged-bottom { bottom: -9px; background-image: linear-gradient(-45deg, #ffffff 8px, transparent 0), linear-gradient(45deg, #ffffff 8px, transparent 0); }
 
-        /* Progress Bar */
         .progress-container { height: 8px; background: #f1f5f9; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, #60a5fa, #3b82f6); transition: width 1s ease; }
 
-        /* Navigation Bottom */
         .nav-bottom {
             position: fixed; bottom: 0; left: 0; width: 100%; background: white;
             border-top: 1px solid #e2e8f0; padding: 10px 5px; z-index: 50; height: 75px;
             display: flex; justify-content: space-around; align-items: center;
         }
 
-        /* Modal / Popup */
         .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.3); backdrop-filter: blur(5px); align-items: center; justify-content: center; padding: 20px; }
         .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 18px; }
-
-        /* Mini Calendar */
-        .mini-calendar { width: 160px; font-size: 8px; }
-        .cal-day { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 600; }
-        .today { background: #3b82f6; color: white; }
-        .deadline-mark { background: #dbeafe; color: #1e40af; border: 1px solid #3b82f6; }
     </style>
 </head>
-<body>
+<body class="pb-24">
 
     <div class="cloud-bg"></div>
 
-    <div class="floater text-3xl" style="top: 15%; left: 10%; animation-duration: 6s;">⭐</div>
-    <div class="floater text-2xl" style="top: 60%; left: 15%; animation-duration: 7s;">💙</div>
-    <div class="floater text-4xl" style="top: 25%; right: 12%; animation-duration: 5s;">✨</div>
-    <div class="floater text-2xl" style="top: 75%; right: 18%; animation-duration: 8s;">💖</div>
-    <div class="floater text-3xl" style="top: 85%; left: 40%; animation-duration: 6s;">⭐</div>
+    <div class="floater w-8 h-8" style="top: 10%; left: 5%; animation-duration: 6s;">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+    <div class="floater w-6 h-6" style="top: 40%; right: 8%; animation-duration: 8s;">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </div>
+    <div class="floater w-10 h-10" style="bottom: 20%; left: 10%; animation-duration: 7s;">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9v7a2 2 0 0 0 2 2h3v-8H5v-1a7 7 0 0 1 14 0v1h-3v8h3a2 2 0 0 0 2-2v-7a9 9 0 0 0-9-9z"/></svg>
+    </div>
 
     <button onclick="openContact()" class="fixed top-4 right-4 z-[60] bg-white/90 backdrop-blur-md border-2 border-blue-300 p-2 rounded-2xl shadow-lg hover:scale-105 transition-all">
         <div class="flex flex-col items-center">
@@ -108,38 +95,27 @@
 
     <div class="main-container max-w-md md:max-w-4xl px-4">
         
-        <div class="w-full aspect-[16/5] bg-white rounded-3xl overflow-hidden shadow-md border-4 border-white mb-6 relative">
-            <div class="absolute inset-0 flex items-center justify-center opacity-30 italic font-fredoka">Your Banner Here</div>
+        <div class="w-full aspect-[16/5] bg-white rounded-3xl overflow-hidden shadow-md border-4 border-white mb-8 relative">
+            <div class="absolute inset-0 flex items-center justify-center opacity-20 italic font-fredoka text-sm">Banner Space</div>
         </div>
 
-        <div class="flex flex-col md:flex-row gap-6 items-start">
-            
-            <div class="mini-calendar glass-card p-3 border border-blue-200 shrink-0 mx-auto md:mx-0 shadow-inner bg-white/50">
-                <h3 id="cal-month" class="font-fredoka text-[9px] font-bold text-blue-600 mb-2 text-center uppercase tracking-widest">Month 2026</h3>
-                <div class="grid grid-cols-7 gap-1 text-center opacity-40 font-bold mb-1" style="font-size: 6px;">
-                    <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+        <div class="paper-container w-full pt-8 pb-12 px-6 sm:px-10 z-10 relative">
+            <div class="jagged-top"></div>
+            <div class="jagged-bottom"></div>
+
+            <div class="flex justify-between items-start mb-8">
+                <div>
+                    <h1 class="font-fredoka text-blue-600 text-3xl md:text-5xl font-black leading-none uppercase">Queue List</h1>
+                    <p class="text-[10px] md:text-sm mt-1 text-blue-400 font-medium italic">✨ รายการคิวงานทั้งหมด ตรวจสอบได้ที่นี่</p>
                 </div>
-                <div id="calendar-grid" class="grid grid-cols-7 gap-0.5"></div>
+                <div class="bg-blue-500 text-white px-4 py-2 rounded-2xl text-center shadow-lg min-w-[90px] border-2 border-white">
+                    <p class="text-[8px] md:text-[10px] uppercase font-bold leading-tight italic">Current<br>Queue</p>
+                    <p id="total-working" class="text-3xl md:text-4xl font-black font-fredoka leading-none">--</p>
+                </div>
             </div>
 
-            <div class="paper-container flex-1 w-full pt-8 pb-12 px-6 sm:px-10 z-10 relative">
-                <div class="jagged-top"></div>
-                <div class="jagged-bottom"></div>
-
-                <div class="flex justify-between items-start mb-8">
-                    <div>
-                        <h1 class="font-fredoka text-blue-600 text-3xl md:text-5xl font-black leading-none uppercase">Queue List</h1>
-                        <p class="text-[10px] md:text-sm mt-1 text-blue-400 font-medium italic">✨ รายการคิวงานทั้งหมด ตรวจสอบได้ที่นี่</p>
-                    </div>
-                    <div class="bg-blue-500 text-white px-4 py-2 rounded-2xl text-center shadow-lg min-w-[90px] border-2 border-white">
-                        <p class="text-[8px] md:text-[10px] uppercase font-bold leading-tight italic">Current<br>Queue</p>
-                        <p id="total-working" class="text-3xl md:text-4xl font-black font-fredoka leading-none">--</p>
-                    </div>
-                </div>
-
-                <div id="queue-list" class="space-y-4 min-h-[300px]">
-                    <p class="text-center py-20 opacity-40 text-xs italic font-medium">กำลังเปิดสมุดจดคิวงาน...</p>
-                </div>
+            <div id="queue-list" class="space-y-4 min-h-[300px]">
+                <p class="text-center py-20 opacity-40 text-xs italic font-medium">กำลังเปิดสมุดจดคิวงาน...</p>
             </div>
         </div>
     </div>
@@ -161,28 +137,36 @@
     </div>
 
     <nav class="nav-bottom max-w-md md:max-w-4xl mx-auto left-0 right-0 rounded-t-3xl shadow-lg border-x md:border-t border-blue-100">
-        <a href="index.html" class="flex flex-col items-center text-blue-500 font-bold gap-1"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span class="text-[9px]">WORK QUEUE</span></a>
-        <a href="details.html" class="flex flex-col items-center text-gray-400 font-bold gap-1"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg><span class="text-[9px]">รายละเอียด</span></a>
-        <a href="prices.html" class="flex flex-col items-center text-gray-400 font-bold gap-1"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="text-[9px]">ราคา</span></a>
+        <a href="index.html" class="flex flex-col items-center text-blue-500 font-bold gap-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span class="text-[9px]">WORK QUEUE</span>
+        </a>
+        <a href="details.html" class="flex flex-col items-center text-gray-400 font-bold gap-1 group">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+            <span class="text-[9px]">รายละเอียด</span>
+        </a>
+        <a href="prices.html" class="flex flex-col items-center text-gray-400 font-bold gap-1 group">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span class="text-[9px]">ราคา</span>
+        </a>
     </nav>
 
     <div id="contact-modal" class="modal" onclick="closeContact()">
         <div class="glass-card bg-white p-7 w-full max-w-xs shadow-2xl transform scale-95 transition-all" id="contact-inner" onclick="event.stopPropagation()">
             <h3 class="text-lg font-bold text-blue-600 text-center mb-5 italic font-fredoka uppercase tracking-wider">Contact Me ✨</h3>
             <div class="grid gap-2.5 text-sm font-bold text-center">
-                <a href="ใส่_ลิ้งค์_Line" target="_blank" class="bg-[#06C755] text-white py-3 rounded-2xl active:scale-95 transition shadow">LINE</a>
-                <a href="ใส่_ลิ้งค์_Facebook" target="_blank" class="bg-[#1877F2] text-white py-3 rounded-2xl active:scale-95 transition shadow">FACEBOOK</a>
-                <a href="ใส่_ลิ้งค์_Instagram" target="_blank" class="bg-gradient-to-r from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white py-3 rounded-2xl active:scale-95 transition shadow">INSTAGRAM</a>
-                <a href="ใส่_ลิ้งค์_VGen" target="_blank" class="bg-black text-white py-3 rounded-2xl active:scale-95 transition shadow border-2 border-white/10">VGEN</a>
+                <a href="ใส่_ลิ้งค์_Line" target="_blank" class="bg-[#06C755] text-white py-3 rounded-xl shadow">LINE</a>
+                <a href="ใส่_ลิ้งค์_Facebook" target="_blank" class="bg-[#1877F2] text-white py-3 rounded-xl shadow">FACEBOOK</a>
+                <a href="ใส่_ลิ้งค์_Instagram" target="_blank" class="bg-gradient-to-r from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white py-3 rounded-xl shadow">INSTAGRAM</a>
+                <a href="ใส่_ลิ้งค์_VGen" target="_blank" class="bg-black text-white py-3 rounded-xl shadow border-2 border-white/10">VGEN</a>
             </div>
-            <button onclick="closeContact()" class="w-full mt-5 text-gray-400 text-[10px] font-bold tracking-tighter">CLOSE</button>
+            <button onclick="closeContact()" class="w-full mt-5 text-gray-400 text-[10px] font-bold">CLOSE</button>
         </div>
     </div>
 
     <script>
         const API_URL = 'https://script.google.com/macros/s/AKfycby0BShFOZHG56avG_I3t7CzX_pIv2tJ5pCKbU4ISNgw1HCdWhkTasD5_9Mz8UQtrfaN/exec';
 
-        // ปรับ Format วันที่
         function formatDate(rawDate) {
             if (!rawDate) return '-';
             const d = new Date(rawDate);
@@ -198,70 +182,36 @@
                 const data = await response.json();
                 list.innerHTML = '';
                 
-                // หา ID ของคิวที่กำลังทำ
-                const workingJob = data.find(item => item.status === 'กำลังทำ');
+                // หาเลขคิว (q_id) ของงานที่สถานะเป็น 'working'
+                const workingJob = data.find(item => item.status === 'working');
                 totalDisplay.innerText = workingJob ? workingJob.q_id.toString().padStart(2, '0') : '--';
 
-                // สร้างปฏิทิน
-                buildCalendar(data);
-
-                // แสดงคิวทั้งหมด
                 data.forEach(item => {
                     const progressValue = item.progress ? item.progress.toString().replace('%','') : 0;
-                    const isWorking = item.status === 'กำลังทำ';
+                    const isWorking = item.status === 'working';
+                    const isSent = item.status === 'sent';
                     const row = document.createElement('div');
                     
-                    // สไตล์การ์ด: ถ้ากำลังทำจะมีขอบสีฟ้าเข้มและเงา
-                    row.className = `glass-card p-5 flex flex-col gap-2.5 cursor-pointer border ${isWorking ? 'border-blue-500 shadow-lg bg-white' : 'border-blue-50 bg-white/70'} mb-2 transition-all hover:bg-white active:scale-[0.98]`;
+                    row.className = `glass-card p-5 flex flex-col gap-2.5 cursor-pointer border ${isWorking ? 'border-blue-500 shadow-lg' : 'border-blue-50'} mb-2 transition-all hover:bg-white active:scale-[0.98]`;
                     row.onclick = () => openModal(item);
                     
                     row.innerHTML = `
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-2.5">
                                 <span class="font-fredoka font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded text-[11px] border border-blue-100">#${item.q_id}</span>
-                                <span class="font-semibold text-xs md:text-base truncate w-32 md:w-80 text-blue-950">${item.customer}</span>
+                                <span class="font-semibold text-xs md:text-base truncate w-32 md:w-80">${item.customer}</span>
                             </div>
-                            <span class="text-[9px] font-bold uppercase tracking-tight flex items-center gap-1 ${isWorking ? 'text-blue-600' : 'text-gray-300'}">
-                                ${isWorking ? '<span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> Working' : 'Waiting'}
+                            <span class="text-[9px] font-bold uppercase flex items-center gap-1 ${isWorking ? 'text-blue-600' : (isSent ? 'text-green-500' : 'text-gray-300')}">
+                                ${isWorking ? '<span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> Working' : (isSent ? '● Sent' : 'Waiting')}
                             </span>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="progress-container flex-1"><div class="progress-fill" style="width: ${progressValue}%"></div></div>
-                            <span class="font-fredoka font-bold text-blue-500 text-xs">${item.progress}</span>
+                            <span class="font-fredoka font-bold text-blue-500 text-xs">${item.progress}%</span>
                         </div>`;
                     list.appendChild(row);
                 });
-            } catch (e) { list.innerHTML = '<p class="text-center py-20 text-xs">Error loading data.</p>'; }
-        }
-
-        function buildCalendar(data) {
-            const grid = document.getElementById('calendar-grid');
-            const monthLabel = document.getElementById('cal-month');
-            const now = new Date();
-            monthLabel.innerText = now.toLocaleString('en-US', { month: 'short', year: 'numeric' });
-            
-            const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
-            const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-            
-            grid.innerHTML = '';
-            for(let i=0; i<firstDay; i++) grid.innerHTML += '<div></div>';
-            
-            const deadlineDays = data.map(item => {
-                const d = new Date(item.deadline);
-                return isNaN(d.getTime()) ? null : d.toDateString();
-            });
-
-            for(let day=1; day<=daysInMonth; day++) {
-                const dateObj = new Date(now.getFullYear(), now.getMonth(), day);
-                const isToday = dateObj.toDateString() === now.toDateString();
-                const isDeadline = deadlineDays.includes(dateObj.toDateString());
-                
-                let cls = 'cal-day';
-                if(isToday) cls += ' today shadow';
-                else if(isDeadline) cls += ' deadline-mark shadow-sm';
-                
-                grid.innerHTML += `<div class="${cls}">${day}</div>`;
-            }
+            } catch (e) { list.innerHTML = '<p class="text-center py-20 text-xs text-red-400 font-bold">Error loading queue.</p>'; }
         }
 
         function openModal(i) {
